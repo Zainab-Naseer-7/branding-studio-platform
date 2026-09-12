@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRANDORA — Build a Brand People Remember | Premium Branding Studio Platform</title>
+  <meta name="description" content="World-class, ultra-premium branding studio platform for creative teams, agency leaders, and forward-thinking enterprises. Plan, build, manage, and analyze your brand identity.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-midnight">
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- AUTH / LOGIN OVERLAY -->
+  <div id="auth-screen" class="auth-screen">
+    <div class="auth-backdrop-glow"></div>
+    <div class="auth-container">
+      <div class="auth-brand-badge">
+        <svg class="brand-logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="url(#brand-grad-auth)"/>
+          <path d="M10 22V10L16 16L22 10V22M16 16V22" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="brand-grad-auth" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF5E4D"/>
+              <stop offset="1" stop-color="#FFA034"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="auth-brand-name">BRANDORA</span>
+      </div>
+      <p class="auth-tagline">"Build a Brand People Remember."</p>
+      
+      <div class="auth-card glass-panel">
+        <div class="auth-card-header">
+          <h2 class="auth-title">Welcome to Studio</h2>
+          <p class="auth-subtitle">Sign in to your brand management workspace</p>
+        </div>
+
+        <form id="login-form" class="auth-form" onsubmit="event.preventDefault(); window.BrandoraApp.handleLogin();">
+          <div class="form-group">
+            <label for="login-email" class="form-label">Work Email</label>
+            <div class="input-icon-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <input type="email" id="login-email" class="form-input" placeholder="creative.director@brandora.studio" value="creative.director@brandora.studio" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="login-password" class="form-label">Password</label>
+              <button type="button" class="text-btn text-muted-link" onclick="window.BrandoraApp.showForgotPasswordModal()">Forgot Password?</button>
+            </div>
+            <div class="input-icon-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" value="brandora2026" required>
+            </div>
+          </div>
+
+          <div class="form-actions-row">
+            <label class="checkbox-container">
+              <input type="checkbox" id="login-remember" checked>
+              <span class="custom-checkbox"></span>
+              <span class="checkbox-label">Remember my session</span>
+            </label>
+          </div>
+
+          <button type="submit" id="btn-login" class="btn btn-primary btn-block btn-lg">
+            <span>Sign In to Studio</span>
+            <svg class="btn-icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+
+        <div class="auth-divider">
+          <span>OR</span>
+        </div>
+
+        <button type="button" id="btn-demo-login" class="btn btn-secondary btn-block btn-demo-glow" onclick="window.BrandoraApp.enterDemoWorkspace()">
+          <svg class="btn-icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Instant Access: Enter Demo Workspace</span>
+        </button>
+
+        <div class="auth-footer-note">
+          <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>End-to-End Client Identity Encryption &bull; v2.6 Studio Edition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP SHELL -->
+  <div id="app-shell" class="app-shell hidden">
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-identity-lockup">
+          <div class="brand-logo-symbol">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="url(#sidebar-brand-grad)"/>
+              <path d="M9 22V10L16 16L23 10V22M16 16V22" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="sidebar-brand-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FF5E4D"/>
+                  <stop offset="1" stop-color="#FFA034"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="brand-name-group">
+            <span class="brand-logo-text">BRANDORA</span>
+            <span class="brand-studio-sub">Brand Studio Pro</span>
+          </div>
+        </div>
+        <button type="button" id="btn-sidebar-collapse" class="sidebar-collapse-btn" title="Toggle Navigation" aria-label="Toggle Navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- BRAND SELECTOR IN SIDEBAR -->
+      <div class="sidebar-brand-switch">
+        <label class="sidebar-switch-label" for="active-brand-select">ACTIVE BRAND</label>
+        <div class="custom-select-wrapper">
+          <select id="active-brand-select" class="sidebar-brand-dropdown" onchange="window.BrandoraApp.switchBrand(this.value)">
+            <option value="brandora">Brandora Core</option>
+            <option value="aura">Aura Labs</option>
+            <option value="velox">Velox Studio</option>
+            <option value="lumina">Lumina Health</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- NAVIGATION LINKS -->
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <div class="nav-section-title">CORE STUDIO</div>
+        <ul class="nav-list">
+          <li>
+            <button type="button" class="nav-item active" data-view="overview">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="7" height="9" rx="1.5"></rect>
+                <rect x="14" y="3" width="7" height="5" rx="1.5"></rect>
+                <rect x="14" y="12" width="7" height="9" rx="1.5"></rect>
+                <rect x="3" y="16" width="7" height="5" rx="1.5"></rect>
+              </svg>
+              <span class="nav-label">Overview</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="workspace">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span class="nav-label">Brand Workspace</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="identity">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+              <span class="nav-label">Identity</span>
+              <span class="nav-pill">10 Sec</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="logo-lab">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              <span class="nav-label">Logo Lab</span>
+              <span class="nav-badge" id="badge-logos-count">8</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="colors">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2v20"></path>
+                <path d="M12 12l7 7"></path>
+              </svg>
+              <span class="nav-label">Colors</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="typography">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                <line x1="9" y1="20" x2="15" y2="20"></line>
+                <line x1="12" y1="4" x2="12" y2="20"></line>
+              </svg>
+              <span class="nav-label">Typography</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="moodboard">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span class="nav-label">Moodboard</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="assets">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="nav-label">Assets</span>
+              <span class="nav-badge" id="badge-assets-count">486</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">MANAGEMENT</div>
+        <ul class="nav-list">
+          <li>
+            <button type="button" class="nav-item" data-view="projects">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+              <span class="nav-label">Projects</span>
+              <span class="nav-badge" id="badge-projects-count">24</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="content">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+              <span class="nav-label">Content</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="clients">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span class="nav-label">Clients</span>
+              <span class="nav-badge" id="badge-clients-count">18</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="team">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M20 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M4 21v-2a4 4 0 0 1 3-3.87"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span class="nav-label">Team</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="tasks">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polyline points="9 11 12 14 22 4"></polyline>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+              <span class="nav-label">Tasks</span>
+              <span class="nav-badge alert-badge" id="badge-tasks-count">5</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="calendar">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span class="nav-label">Calendar</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="nav-section-title">INTELLIGENCE</div>
+        <ul class="nav-list">
+          <li>
+            <button type="button" class="nav-item" data-view="analytics">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              <span class="nav-label">Analytics</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="consistency">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <span class="nav-label">Consistency Score</span>
+              <span class="nav-pill score-pill">94%</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="reports">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span class="nav-label">Reports</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="notifications">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="nav-label">Notifications</span>
+              <span class="nav-badge" id="badge-notif-sidebar">3</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="messages">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="nav-label">Studio Chat</span>
+              <span class="nav-badge" id="badge-messages-count">2</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="nav-item" data-view="settings">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span class="nav-label">Settings</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- SIDEBAR FOOTER USER CARD -->
+      <div class="sidebar-user-card">
+        <div class="user-avatar-wrapper">
+          <div class="user-avatar-initials">EV</div>
+          <span class="status-indicator online"></span>
+        </div>
+        <div class="user-info-text">
+          <span class="user-display-name">Elena Vance</span>
+          <span class="user-role-badge">Creative Director</span>
+        </div>
+        <button type="button" class="btn-icon-subtle" onclick="window.BrandoraApp.handleLogout()" title="Sign Out" aria-label="Sign Out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper">
+      <!-- TOP NAVIGATION BAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" id="btn-mobile-nav" class="btn-icon-subtle mobile-toggle" aria-label="Open Navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          
+          <div class="global-search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search brands, assets, tasks, clients, guidelines (Press '/' to search)..." autocomplete="off">
+            <kbd class="search-kbd">/</kbd>
+            
+            <!-- SEARCH RESULTS DROPDOWN -->
+            <div id="search-results-dropdown" class="search-results-dropdown hidden">
+              <div class="search-results-header">Search Results</div>
+              <div id="search-results-list" class="search-results-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- QUICK CREATE BUTTON & MENU -->
+          <div class="dropdown-wrapper">
+            <button type="button" id="btn-quick-create" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.toggleQuickCreateDropdown()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Quick Create</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="quick-create-dropdown" class="dropdown-menu hidden">
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.openQuickModal('brand')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span>New Brand</span>
+              </button>
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.openQuickModal('project')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1"></rect>
+                </svg>
+                <span>New Project</span>
+              </button>
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.openQuickModal('asset')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>New Asset</span>
+              </button>
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.openQuickModal('task')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <polyline points="9 11 12 14 22 4"></polyline>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span>New Task</span>
+              </button>
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.openQuickModal('client')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                </svg>
+                <span>New Client</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- NOTIFICATIONS BELL -->
+          <div class="dropdown-wrapper">
+            <button type="button" id="btn-top-notif" class="topbar-icon-btn" title="Notifications" onclick="window.BrandoraApp.toggleNotifDropdown()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span id="badge-topbar-notif" class="icon-dot-badge"></span>
+            </button>
+            <div id="top-notif-dropdown" class="dropdown-menu notif-dropdown-menu hidden">
+              <div class="notif-dropdown-head">
+                <span class="dropdown-title">Recent Notifications</span>
+                <button type="button" class="text-btn" onclick="window.BrandoraApp.markAllNotificationsRead()">Mark all read</button>
+              </div>
+              <div id="top-notif-list" class="notif-dropdown-body">
+                <!-- Injected via JS -->
+              </div>
+              <div class="notif-dropdown-foot">
+                <button type="button" class="text-btn-full" onclick="window.BrandoraApp.navigateTo('notifications'); window.BrandoraApp.closeDropdowns();">View all notifications &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MESSAGING ICON -->
+          <button type="button" class="topbar-icon-btn" title="Messages" onclick="window.BrandoraApp.navigateTo('messages')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span class="icon-dot-badge"></span>
+          </button>
+
+          <!-- TOPBAR USER DROPDOWN -->
+          <div class="dropdown-wrapper">
+            <button type="button" id="btn-user-menu" class="user-profile-btn" onclick="window.BrandoraApp.toggleUserDropdown()">
+              <div class="user-avatar-sm">EV</div>
+              <span class="user-name-sm">Elena Vance</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-xs">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="user-menu-dropdown" class="dropdown-menu hidden">
+              <div class="dropdown-user-header">
+                <strong>Elena Vance</strong>
+                <span>elena@brandora.studio</span>
+              </div>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.navigateTo('settings')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>Studio Preferences</span>
+              </button>
+              <button type="button" class="dropdown-item" onclick="window.BrandoraApp.navigateTo('consistency')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+                <span>Consistency Health</span>
+              </button>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="dropdown-item text-danger" onclick="window.BrandoraApp.handleLogout()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW CONTAINER -->
+      <main id="main-view-container" class="view-viewport">
+        <!-- ============================================== -->
+        <!-- 1. OVERVIEW DASHBOARD VIEW -->
+        <!-- ============================================== -->
+        <section id="view-overview" class="studio-view active">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">STUDIO COMMAND CENTER</div>
+              <h1 class="view-title">Brand Overview</h1>
+              <p class="view-subtitle">Everything you need to build a memorable brand.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.navigateTo('reports')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="btn-icon-sm">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <span>Export Report</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openQuickModal('project')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>New Project</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI METRIC CARDS -->
+          <div class="kpi-grid">
+            <div class="kpi-card" onclick="window.BrandoraApp.navigateTo('projects')">
+              <div class="kpi-top">
+                <span class="kpi-label">Brand Projects</span>
+                <span class="kpi-icon-pill">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1"></rect>
+                  </svg>
+                </span>
+              </div>
+              <div class="kpi-main">
+                <div class="kpi-value" id="kpi-projects-val">24</div>
+                <div class="kpi-delta positive">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>+18%</span>
+                </div>
+              </div>
+              <div class="kpi-subtext">4 delivered this sprint</div>
+            </div>
+
+            <div class="kpi-card" onclick="window.BrandoraApp.navigateTo('clients')">
+              <div class="kpi-top">
+                <span class="kpi-label">Active Clients</span>
+                <span class="kpi-icon-pill">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                  </svg>
+                </span>
+              </div>
+              <div class="kpi-main">
+                <div class="kpi-value" id="kpi-clients-val">18</div>
+                <div class="kpi-delta positive">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>+12%</span>
+                </div>
+              </div>
+              <div class="kpi-subtext">3 enterprise onboarding</div>
+            </div>
+
+            <div class="kpi-card" onclick="window.BrandoraApp.navigateTo('assets')">
+              <div class="kpi-top">
+                <span class="kpi-label">Brand Assets</span>
+                <span class="kpi-icon-pill">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="kpi-main">
+                <div class="kpi-value" id="kpi-assets-val">486</div>
+                <div class="kpi-delta positive">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>+28%</span>
+                </div>
+              </div>
+              <div class="kpi-subtext">SVG, vector & guidelines</div>
+            </div>
+
+            <div class="kpi-card" onclick="window.BrandoraApp.navigateTo('content')">
+              <div class="kpi-top">
+                <span class="kpi-label">Campaigns</span>
+                <span class="kpi-icon-pill">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                  </svg>
+                </span>
+              </div>
+              <div class="kpi-main">
+                <div class="kpi-value">37</div>
+                <div class="kpi-delta positive">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>+14%</span>
+                </div>
+              </div>
+              <div class="kpi-subtext">9 scheduled across social</div>
+            </div>
+
+            <div class="kpi-card" onclick="window.BrandoraApp.navigateTo('consistency')">
+              <div class="kpi-top">
+                <span class="kpi-label">Brand Consistency</span>
+                <span class="kpi-icon-pill highlight">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="kpi-main">
+                <div class="kpi-value text-accent">94%</div>
+                <div class="kpi-delta positive">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>+5%</span>
+                </div>
+              </div>
+              <div class="kpi-subtext">Peak studio benchmark</div>
+            </div>
+
+            <div class="kpi-card" onclick="window.BrandoraApp.navigateTo('analytics')">
+              <div class="kpi-top">
+                <span class="kpi-label">Creative Score</span>
+                <span class="kpi-icon-pill">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                </span>
+              </div>
+              <div class="kpi-main">
+                <div class="kpi-value text-warm">91%</div>
+                <div class="kpi-delta positive">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>+9%</span>
+                </div>
+              </div>
+              <div class="kpi-subtext">Audience resonance index</div>
+            </div>
+          </div>
+
+          <!-- OVERVIEW TWO COLUMN WORKSPACE -->
+          <div class="overview-dual-grid">
+            <!-- LEFT: QUICK BRAND IDENTITY OVERVIEW & RADAR -->
+            <div class="studio-card glass-panel">
+              <div class="card-header-row">
+                <div>
+                  <h3 class="card-title">Brand Health & Pulse</h3>
+                  <p class="card-subtitle">Active Identity: <strong id="active-brand-banner-title">Brandora Core</strong></p>
+                </div>
+                <button type="button" class="btn btn-secondary btn-xs" onclick="window.BrandoraApp.navigateTo('workspace')">Edit Identity</button>
+              </div>
+
+              <div class="brand-radar-container">
+                <div class="brand-pulse-bars">
+                  <div class="pulse-bar-item">
+                    <div class="pulse-bar-label">
+                      <span>Visual Identity Fidelity</span>
+                      <strong>96%</strong>
+                    </div>
+                    <div class="meter-track"><div class="meter-fill" style="width: 96%"></div></div>
+                  </div>
+                  <div class="pulse-bar-item">
+                    <div class="pulse-bar-label">
+                      <span>Color System Cohesion</span>
+                      <strong>98%</strong>
+                    </div>
+                    <div class="meter-track"><div class="meter-fill" style="width: 98%"></div></div>
+                  </div>
+                  <div class="pulse-bar-item">
+                    <div class="pulse-bar-label">
+                      <span>Typography Hierarchy</span>
+                      <strong>92%</strong>
+                    </div>
+                    <div class="meter-track"><div class="meter-fill" style="width: 92%"></div></div>
+                  </div>
+                  <div class="pulse-bar-item">
+                    <div class="pulse-bar-label">
+                      <span>Tone & Voice Alignment</span>
+                      <strong>90%</strong>
+                    </div>
+                    <div class="meter-track"><div class="meter-fill" style="width: 90%"></div></div>
+                  </div>
+                </div>
+
+                <div class="brand-key-attributes">
+                  <div class="attr-pill">
+                    <span class="attr-title">Industry</span>
+                    <span class="attr-val" id="ov-attr-industry">Creative Tech & SaaS</span>
+                  </div>
+                  <div class="attr-pill">
+                    <span class="attr-title">Personality</span>
+                    <span class="attr-val" id="ov-attr-personality">Visionary, Refined, Bold</span>
+                  </div>
+                  <div class="attr-pill">
+                    <span class="attr-title">Voice</span>
+                    <span class="attr-val" id="ov-attr-voice">Confident, Crisp, Authoritative</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: ACTIVE PROJECTS STATUS -->
+            <div class="studio-card glass-panel">
+              <div class="card-header-row">
+                <div>
+                  <h3 class="card-title">Priority Projects</h3>
+                  <p class="card-subtitle">Active creative deliveries</p>
+                </div>
+                <button type="button" class="btn btn-secondary btn-xs" onclick="window.BrandoraApp.navigateTo('projects')">View All</button>
+              </div>
+
+              <div id="overview-projects-list" class="overview-list-container">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- RECENT ASSETS & ACTIVE TASKS ROW -->
+          <div class="overview-dual-grid mt-24">
+            <div class="studio-card glass-panel">
+              <div class="card-header-row">
+                <div>
+                  <h3 class="card-title">High Priority Tasks</h3>
+                  <p class="card-subtitle">Immediate creative deadlines</p>
+                </div>
+                <button type="button" class="btn btn-secondary btn-xs" onclick="window.BrandoraApp.openQuickModal('task')">+ Add Task</button>
+              </div>
+              <div id="overview-tasks-list" class="overview-task-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <div class="studio-card glass-panel">
+              <div class="card-header-row">
+                <div>
+                  <h3 class="card-title">Live Creative Activity</h3>
+                  <p class="card-subtitle">Real-time studio updates</p>
+                </div>
+                <span class="badge-live-pulse"><span class="pulse-dot"></span> LIVE</span>
+              </div>
+              <div class="activity-timeline">
+                <div class="timeline-item">
+                  <div class="timeline-bullet coral"></div>
+                  <div class="timeline-content">
+                    <span class="timeline-title">Elena Vance approved Logo Concept: <strong>Geometric Monogram V2</strong></span>
+                    <span class="timeline-time">14 mins ago</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-bullet amber"></div>
+                  <div class="timeline-content">
+                    <span class="timeline-title">Marcus Chen synced color palette: <strong>Luxury Midnight Warmth</strong></span>
+                    <span class="timeline-time">1 hour ago</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-bullet teal"></div>
+                  <div class="timeline-content">
+                    <span class="timeline-title">Aria Sterling scheduled campaign post for <strong>LinkedIn Brand Reveal</strong></span>
+                    <span class="timeline-time">3 hours ago</span>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-bullet purple"></div>
+                  <div class="timeline-content">
+                    <span class="timeline-title">Brand Health Report 2026 Q3 generated for <strong>Lumina Health</strong></span>
+                    <span class="timeline-time">Yesterday</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 2. BRAND WORKSPACE VIEW -->
+        <!-- ============================================== -->
+        <section id="view-workspace" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CORE FOUNDATION</div>
+              <h1 class="view-title">Brand Workspace</h1>
+              <p class="view-subtitle">Comprehensive master profile of your active brand identity.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.resetBrandWorkspace()">Reset to Defaults</button>
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.saveBrandWorkspace()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                <span>Save Workspace Changes</span>
+              </button>
+            </div>
+          </div>
+
+          <form id="brand-workspace-form" class="workspace-profile-grid">
+            <div class="studio-card glass-panel col-span-2">
+              <div class="brand-hero-header">
+                <div class="brand-hero-avatar">
+                  <span id="ws-avatar-initials">BO</span>
+                </div>
+                <div class="brand-hero-meta">
+                  <h2 id="ws-header-brand-name" class="brand-hero-title">BRANDORA</h2>
+                  <p id="ws-header-tagline" class="brand-hero-tagline">"Build a Brand People Remember."</p>
+                  <div class="brand-hero-tags">
+                    <span class="badge-subtle" id="ws-tag-industry">Creative Tech & SaaS</span>
+                    <span class="badge-subtle" id="ws-tag-tier">Tier 1 Global</span>
+                    <span class="badge-subtle highlight" id="ws-tag-status">Verified Studio Active</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FIELD 1: CORE DETAILS -->
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Core Brand Details</h3>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-name">Brand Name</label>
+                <input type="text" id="ws-input-name" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-tagline">Tagline</label>
+                <input type="text" id="ws-input-tagline" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-industry">Industry & Domain</label>
+                <input type="text" id="ws-input-industry" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-desc">Brand Description</label>
+                <textarea id="ws-input-desc" class="form-textarea" rows="4" required></textarea>
+              </div>
+            </div>
+
+            <!-- FIELD 2: AUDIENCE & ESSENCE -->
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Audience & Voice</h3>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-audience">Target Audience</label>
+                <input type="text" id="ws-input-audience" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-personality">Brand Personality Attributes</label>
+                <input type="text" id="ws-input-personality" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-voice">Brand Voice & Verbal Tone</label>
+                <input type="text" id="ws-input-voice" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-input-positioning">Market Positioning</label>
+                <input type="text" id="ws-input-positioning" class="form-input" required>
+              </div>
+            </div>
+
+            <!-- FIELD 3: MISSION, VISION, VALUES -->
+            <div class="studio-card glass-panel col-span-2">
+              <h3 class="card-title mb-16">Pillars of Impact</h3>
+              <div class="triple-input-grid">
+                <div class="form-group">
+                  <label class="form-label" for="ws-input-mission">Brand Mission</label>
+                  <textarea id="ws-input-mission" class="form-textarea" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ws-input-vision">Brand Vision</label>
+                  <textarea id="ws-input-vision" class="form-textarea" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ws-input-values">Core Values</label>
+                  <textarea id="ws-input-values" class="form-textarea" rows="4" required></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 3. BRAND IDENTITY BUILDER VIEW -->
+        <!-- ============================================== -->
+        <section id="view-identity" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">INTERACTIVE ARCHITECTURE</div>
+              <h1 class="view-title">Brand Identity Builder</h1>
+              <p class="view-subtitle">Ten foundational strategic pillars defining your brand DNA.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.expandAllIdentityCards()">Expand All</button>
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.saveAllIdentityCards()">Save All Pillars</button>
+            </div>
+          </div>
+
+          <div id="identity-pillars-grid" class="identity-cards-grid">
+            <!-- 10 Interactive Pillars Injected via JS with inline Edit / Save / Cancel / Copy -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 4. LOGO LAB VIEW -->
+        <!-- ============================================== -->
+        <section id="view-logo-lab" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">VECTOR SYMBOL WORKSHOP</div>
+              <h1 class="view-title">Logo Lab</h1>
+              <p class="view-subtitle">Generate, curate, customize, and export high-impact brandmarks.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openNewLogoModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Create Concept</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- LOGO LAB FILTER BAR -->
+          <div class="filter-pills-bar">
+            <button type="button" class="filter-pill active" data-style-filter="all" onclick="window.BrandoraApp.filterLogos('all', this)">All Concepts (<span id="count-logo-all">8</span>)</button>
+            <button type="button" class="filter-pill" data-style-filter="Minimal" onclick="window.BrandoraApp.filterLogos('Minimal', this)">Minimal</button>
+            <button type="button" class="filter-pill" data-style-filter="Luxury" onclick="window.BrandoraApp.filterLogos('Luxury', this)">Luxury</button>
+            <button type="button" class="filter-pill" data-style-filter="Modern" onclick="window.BrandoraApp.filterLogos('Modern', this)">Modern</button>
+            <button type="button" class="filter-pill" data-style-filter="Geometric" onclick="window.BrandoraApp.filterLogos('Geometric', this)">Geometric</button>
+            <button type="button" class="filter-pill" data-style-filter="Tech" onclick="window.BrandoraApp.filterLogos('Tech', this)">Tech</button>
+            <button type="button" class="filter-pill" data-style-filter="Creative" onclick="window.BrandoraApp.filterLogos('Creative', this)">Creative</button>
+            <button type="button" class="filter-pill" data-style-filter="favorites" onclick="window.BrandoraApp.filterLogos('favorites', this)">★ Favorites Only</button>
+          </div>
+
+          <!-- LOGO CONCEPT CARDS GRID -->
+          <div id="logo-concepts-grid" class="logo-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 5. COLOR PALETTE STUDIO VIEW -->
+        <!-- ============================================== -->
+        <section id="view-colors" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CHROMATIC HARMONY ENGINE</div>
+              <h1 class="view-title">Color Palette Studio</h1>
+              <p class="view-subtitle">Curate, lock, and test high-contrast accessible color systems.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.generateRandomPalette()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <polyline points="1 20 1 14 7 14"></polyline>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                <span>Generate Palette</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.saveActivePalette()">Save Palette</button>
+            </div>
+          </div>
+
+          <!-- PRESETS BAR -->
+          <div class="presets-section">
+            <span class="presets-label">CURATED PRESETS:</span>
+            <div class="preset-buttons-group">
+              <button type="button" class="btn-preset active" onclick="window.BrandoraApp.applyPalettePreset('Luxury')">Luxury</button>
+              <button type="button" class="btn-preset" onclick="window.BrandoraApp.applyPalettePreset('Minimal')">Minimal</button>
+              <button type="button" class="btn-preset" onclick="window.BrandoraApp.applyPalettePreset('Creative')">Creative</button>
+              <button type="button" class="btn-preset" onclick="window.BrandoraApp.applyPalettePreset('Corporate')">Corporate</button>
+              <button type="button" class="btn-preset" onclick="window.BrandoraApp.applyPalettePreset('Tech')">Tech</button>
+              <button type="button" class="btn-preset" onclick="window.BrandoraApp.applyPalettePreset('Editorial')">Editorial</button>
+              <button type="button" class="btn-preset" onclick="window.BrandoraApp.applyPalettePreset('Bold')">Bold</button>
+            </div>
+          </div>
+
+          <!-- PALETTE SWATCHES ROW -->
+          <div id="palette-swatches-row" class="palette-swatches-grid">
+            <!-- 6 core swatches: Primary, Secondary, Accent, Background, Surface, Text -->
+          </div>
+
+          <!-- LIVE PREVIEW COMPONENT -->
+          <div class="studio-card glass-panel mt-24">
+            <h3 class="card-title mb-16">Interactive Component Test Preview</h3>
+            <div id="palette-component-preview" class="palette-test-canvas">
+              <div class="test-canvas-header">
+                <span class="test-badge">Sample Brand Application</span>
+                <h4>Elevating The Digital Frontier</h4>
+                <p>Testing real-time contrast, readability, and visual tension of your selected hex values.</p>
+              </div>
+              <div class="test-canvas-buttons">
+                <button type="button" class="test-btn-primary">Primary Action</button>
+                <button type="button" class="test-btn-secondary">Secondary Action</button>
+                <span class="test-pill">Highlight Accent</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 6. TYPOGRAPHY STUDIO VIEW -->
+        <!-- ============================================== -->
+        <section id="view-typography" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">HIERARCHY & EDITORIAL SUITE</div>
+              <h1 class="view-title">Typography Studio</h1>
+              <p class="view-subtitle">Calibrate heading weights, body legibility, and character scales.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.resetTypography()">Reset Scales</button>
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.saveTypographySettings()">Save Typography</button>
+            </div>
+          </div>
+
+          <div class="typography-layout-grid">
+            <!-- LEFT CONTROLS -->
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Font Selection & Fallbacks</h3>
+              <div class="form-group">
+                <label class="form-label" for="type-heading-font">Heading Font Stack</label>
+                <select id="type-heading-font" class="form-input" onchange="window.BrandoraApp.updateTypographyPreview()">
+                  <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Modern Sans (SF Pro / Segoe UI)</option>
+                  <option value="Georgia, 'Times New Roman', serif">Editorial Serif (Georgia / Didot)</option>
+                  <option value="'Courier New', Courier, monospace">Monospace Tech (Courier / SF Mono)</option>
+                  <option value="'Trebuchet MS', 'Lucida Sans Unicode', sans-serif">Humanist Sans (Trebuchet)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="type-body-font">Body Font Stack</label>
+                <select id="type-body-font" class="form-input" onchange="window.BrandoraApp.updateTypographyPreview()">
+                  <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Clean System Sans</option>
+                  <option value="Georgia, Cambria, serif">Literary Serif</option>
+                  <option value="'Lucida Console', Monaco, monospace">Code Monospace</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="type-accent-font">Accent / Display Font Stack</label>
+                <select id="type-accent-font" class="form-input" onchange="window.BrandoraApp.updateTypographyPreview()">
+                  <option value="Georgia, serif">Luxury Display Serif</option>
+                  <option value="'Arial Black', Impact, sans-serif">Heavy Impact Sans</option>
+                  <option value="'Courier New', monospace">Technical Mono</option>
+                </select>
+              </div>
+
+              <div class="divider-line my-16"></div>
+
+              <h4 class="subcard-title mb-12">Scale & Weight Sliders</h4>
+              <div class="range-control-group">
+                <div class="range-label-row">
+                  <span>H1 Heading Scale</span>
+                  <strong id="val-h1-size">48px</strong>
+                </div>
+                <input type="range" id="slider-h1-size" min="32" max="72" value="48" class="custom-range" oninput="window.BrandoraApp.updateTypographyPreview()">
+              </div>
+
+              <div class="range-control-group">
+                <div class="range-label-row">
+                  <span>Body Base Size</span>
+                  <strong id="val-body-size">16px</strong>
+                </div>
+                <input type="range" id="slider-body-size" min="14" max="20" value="16" class="custom-range" oninput="window.BrandoraApp.updateTypographyPreview()">
+              </div>
+
+              <div class="range-control-group">
+                <div class="range-label-row">
+                  <span>Letter Spacing</span>
+                  <strong id="val-letter-spacing">-0.5px</strong>
+                </div>
+                <input type="range" id="slider-letter-spacing" min="-2" max="4" step="0.5" value="-0.5" class="custom-range" oninput="window.BrandoraApp.updateTypographyPreview()">
+              </div>
+            </div>
+
+            <!-- RIGHT LIVE SPECIMEN PREVIEW -->
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Live Type Specimen Canvas</h3>
+              <div id="type-specimen-canvas" class="type-specimen-box">
+                <div class="specimen-row">
+                  <span class="specimen-tag">H1 &bull; 48px</span>
+                  <h1 class="specimen-h1">Build a Brand People Remember.</h1>
+                </div>
+                <div class="specimen-row">
+                  <span class="specimen-tag">H2 &bull; 32px</span>
+                  <h2 class="specimen-h2">The Strategic Intersection of Identity & Emotion</h2>
+                </div>
+                <div class="specimen-row">
+                  <span class="specimen-tag">H3 &bull; 24px</span>
+                  <h3 class="specimen-h3">Engineering lasting market resonance across every single touchpoint.</h3>
+                </div>
+                <div class="specimen-row">
+                  <span class="specimen-tag">BODY &bull; 16px</span>
+                  <p class="specimen-body">
+                    A great brand transcends cosmetic aesthetics; it represents a unified promise, an unmistakable standard of craftsmanship, and an emotional catalyst that turns casual observers into lifelong brand advocates.
+                  </p>
+                </div>
+                <div class="specimen-row">
+                  <span class="specimen-tag">CAPTION &bull; 13px</span>
+                  <span class="specimen-caption">FIGURE 2.4 &bull; BRAND ARCHITECTURE SPECIFICATION MATRIX 2026</span>
+                </div>
+                <div class="specimen-row">
+                  <span class="specimen-tag">BUTTON CTA</span>
+                  <div class="specimen-buttons">
+                    <button type="button" class="btn btn-primary btn-sm">Explore Identity Studio</button>
+                    <button type="button" class="btn btn-secondary btn-sm">Download Guidelines</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 7. MOODBOARD VIEW -->
+        <!-- ============================================== -->
+        <section id="view-moodboard" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">AESTHETIC INSPIRATION CANVAS</div>
+              <h1 class="view-title">Moodboard</h1>
+              <p class="view-subtitle">Visual textures, artistic quotes, color swatches, and creative direction.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openNewMoodboardModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Inspiration Card</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="moodboard-grid" class="moodboard-masonry-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 8. BRAND ASSETS VIEW -->
+        <!-- ============================================== -->
+        <section id="view-assets" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CREATIVE ASSET VAULT</div>
+              <h1 class="view-title">Brand Assets</h1>
+              <p class="view-subtitle">Vector marks, social templates, print collateral, and guidelines.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openNewAssetModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Upload / Add Asset</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ASSET CATEGORY TABS -->
+          <div class="filter-pills-bar">
+            <button type="button" class="filter-pill active" data-asset-cat="All" onclick="window.BrandoraApp.filterAssets('All', this)">All Assets</button>
+            <button type="button" class="filter-pill" data-asset-cat="Logos" onclick="window.BrandoraApp.filterAssets('Logos', this)">Logos</button>
+            <button type="button" class="filter-pill" data-asset-cat="Social Media" onclick="window.BrandoraApp.filterAssets('Social Media', this)">Social Media</button>
+            <button type="button" class="filter-pill" data-asset-cat="Business Cards" onclick="window.BrandoraApp.filterAssets('Business Cards', this)">Business Cards</button>
+            <button type="button" class="filter-pill" data-asset-cat="Presentations" onclick="window.BrandoraApp.filterAssets('Presentations', this)">Presentations</button>
+            <button type="button" class="filter-pill" data-asset-cat="Packaging" onclick="window.BrandoraApp.filterAssets('Packaging', this)">Packaging</button>
+            <button type="button" class="filter-pill" data-asset-cat="Ads" onclick="window.BrandoraApp.filterAssets('Ads', this)">Ads</button>
+            <button type="button" class="filter-pill" data-asset-cat="Website" onclick="window.BrandoraApp.filterAssets('Website', this)">Website</button>
+            <button type="button" class="filter-pill" data-asset-cat="Print" onclick="window.BrandoraApp.filterAssets('Print', this)">Print</button>
+          </div>
+
+          <!-- ASSET GRID -->
+          <div id="assets-grid" class="assets-cards-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 9. BRAND PROJECTS VIEW -->
+        <!-- ============================================== -->
+        <section id="view-projects" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CREATIVE OPERATIONS</div>
+              <h1 class="view-title">Brand Projects</h1>
+              <p class="view-subtitle">Track deliverables, deadlines, client milestones, and budgets.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openQuickModal('project')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>New Project</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PROJECT STATUS FILTER -->
+          <div class="filter-pills-bar">
+            <button type="button" class="filter-pill active" onclick="window.BrandoraApp.filterProjects('All', this)">All Projects</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterProjects('Planning', this)">Planning</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterProjects('In Progress', this)">In Progress</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterProjects('Review', this)">Review</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterProjects('Completed', this)">Completed</button>
+          </div>
+
+          <div id="projects-list-grid" class="projects-cards-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 10. CONTENT STUDIO VIEW -->
+        <!-- ============================================== -->
+        <section id="view-content" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">OMNICHANNEL STRATEGY</div>
+              <h1 class="view-title">Content Studio</h1>
+              <p class="view-subtitle">Draft, schedule, and review social posts, articles, and brand campaigns.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openNewContentModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Create Content</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-pills-bar">
+            <button type="button" class="filter-pill active" onclick="window.BrandoraApp.filterContent('All', this)">All Platforms</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterContent('Instagram', this)">Instagram</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterContent('LinkedIn', this)">LinkedIn</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterContent('TikTok', this)">TikTok</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterContent('Website', this)">Website / Blog</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterContent('Advertisement', this)">Ads</button>
+          </div>
+
+          <div id="content-items-grid" class="content-cards-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 11. CLIENT MANAGEMENT VIEW -->
+        <!-- ============================================== -->
+        <section id="view-clients" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CLIENT RELATIONSHIPS</div>
+              <h1 class="view-title">Client Management</h1>
+              <p class="view-subtitle">Accounts, brand health scores, contracts, and assigned managers.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openQuickModal('client')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Client</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="clients-toolbar">
+            <div class="input-icon-wrapper search-box-client">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="client-search-filter" class="form-input" placeholder="Search clients by company, industry or contact..." oninput="window.BrandoraApp.filterClientsList(this.value)">
+            </div>
+          </div>
+
+          <div id="clients-table-container" class="studio-card glass-panel p-0 overflow-hidden">
+            <div class="table-responsive">
+              <table class="studio-table" id="clients-table">
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Industry</th>
+                    <th>Projects</th>
+                    <th>Brand Score</th>
+                    <th>Status</th>
+                    <th>Account Manager</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="clients-table-body">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 12. TEAM MANAGEMENT VIEW -->
+        <!-- ============================================== -->
+        <section id="view-team" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CREATIVE COLLECTIVE</div>
+              <h1 class="view-title">Team Management</h1>
+              <p class="view-subtitle">Strategists, directors, copywriters, and UI architects.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openNewTeamModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Team Member</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="team-cards-grid" class="team-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 13. TASK MANAGEMENT VIEW -->
+        <!-- ============================================== -->
+        <section id="view-tasks" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">SPRINT VELOCITY</div>
+              <h1 class="view-title">Task Management</h1>
+              <p class="view-subtitle">Organize studio deliverables with priority tags and due dates.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openQuickModal('task')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Create Task</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-pills-bar">
+            <button type="button" class="filter-pill active" onclick="window.BrandoraApp.filterTasks('All', this)">All Tasks</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterTasks('Urgent', this)">Urgent</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterTasks('High', this)">High</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterTasks('Medium', this)">Medium</button>
+            <button type="button" class="filter-pill" onclick="window.BrandoraApp.filterTasks('Completed', this)">Completed</button>
+          </div>
+
+          <div class="studio-card glass-panel">
+            <div id="tasks-list-container" class="task-items-list">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 14. CALENDAR VIEW -->
+        <!-- ============================================== -->
+        <section id="view-calendar" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">SCHEDULE & MILESTONES</div>
+              <h1 class="view-title">Creative Calendar</h1>
+              <p class="view-subtitle">Review meetings, logo presentations, and campaign launches.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openNewEventModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Event</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar-layout-grid">
+            <!-- CALENDAR GRID -->
+            <div class="studio-card glass-panel">
+              <div class="calendar-nav-bar">
+                <div class="calendar-month-title" id="calendar-current-month">September 2026</div>
+                <div class="calendar-nav-btns">
+                  <button type="button" class="btn-icon-subtle" onclick="window.BrandoraApp.changeCalendarMonth(-1)" aria-label="Previous Month">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
+                  <button type="button" class="btn-icon-subtle" onclick="window.BrandoraApp.changeCalendarMonth(1)" aria-label="Next Month">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="calendar-grid-header">
+                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+              </div>
+              <div id="calendar-month-days" class="calendar-month-cells">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- UPCOMING EVENTS AGENDA -->
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Upcoming Milestones</h3>
+              <div id="calendar-agenda-list" class="calendar-agenda-items">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 15. BRAND ANALYTICS VIEW -->
+        <!-- ============================================== -->
+        <section id="view-analytics" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">QUANTITATIVE INTELLIGENCE</div>
+              <h1 class="view-title">Brand Analytics</h1>
+              <p class="view-subtitle">Interactive performance telemetry across channels and campaigns.</p>
+            </div>
+            <div class="view-actions">
+              <div class="time-filter-group">
+                <button type="button" class="time-filter-btn" onclick="window.BrandoraApp.changeAnalyticsTimeframe('7d', this)">7 Days</button>
+                <button type="button" class="time-filter-btn active" onclick="window.BrandoraApp.changeAnalyticsTimeframe('30d', this)">30 Days</button>
+                <button type="button" class="time-filter-btn" onclick="window.BrandoraApp.changeAnalyticsTimeframe('90d', this)">90 Days</button>
+                <button type="button" class="time-filter-btn" onclick="window.BrandoraApp.changeAnalyticsTimeframe('1y', this)">1 Year</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANALYTICS TOP METRICS -->
+          <div class="analytics-metrics-grid">
+            <div class="stat-pill-box">
+              <span class="stat-pill-title">Brand Awareness</span>
+              <span class="stat-pill-value" id="ana-val-awareness">84.2K</span>
+              <span class="stat-pill-delta text-positive">+24.5% vs prior</span>
+            </div>
+            <div class="stat-pill-box">
+              <span class="stat-pill-title">Engagement Rate</span>
+              <span class="stat-pill-value" id="ana-val-engagement">5.82%</span>
+              <span class="stat-pill-delta text-positive">+1.2% industry avg</span>
+            </div>
+            <div class="stat-pill-box">
+              <span class="stat-pill-title">Audience Growth</span>
+              <span class="stat-pill-value" id="ana-val-growth">+14,920</span>
+              <span class="stat-pill-delta text-positive">+38% net gain</span>
+            </div>
+            <div class="stat-pill-box">
+              <span class="stat-pill-title">Client Satisfaction</span>
+              <span class="stat-pill-value" id="ana-val-csat">98.4%</span>
+              <span class="stat-pill-delta text-positive">NPS +76</span>
+            </div>
+          </div>
+
+          <!-- SVG CHARTS GRID -->
+          <div class="charts-dual-grid mt-24">
+            <div class="studio-card glass-panel">
+              <div class="card-header-row">
+                <div>
+                  <h3 class="card-title">Brand Awareness & Engagement Trajectory</h3>
+                  <p class="card-subtitle">Aggregated reach across touchpoints</p>
+                </div>
+                <div class="chart-legend-row">
+                  <span class="legend-item"><span class="legend-dot coral"></span> Awareness</span>
+                  <span class="legend-item"><span class="legend-dot amber"></span> Engagement</span>
+                </div>
+              </div>
+              <div class="chart-canvas-container">
+                <svg id="chart-awareness-svg" class="analytics-svg" viewBox="0 0 600 240" preserveAspectRatio="none">
+                  <!-- Injected via JS -->
+                </svg>
+              </div>
+            </div>
+
+            <div class="studio-card glass-panel">
+              <div class="card-header-row">
+                <div>
+                  <h3 class="card-title">Content Performance by Platform</h3>
+                  <p class="card-subtitle">Average impressions per published asset</p>
+                </div>
+              </div>
+              <div class="chart-canvas-container">
+                <svg id="chart-channels-svg" class="analytics-svg" viewBox="0 0 600 240" preserveAspectRatio="none">
+                  <!-- Injected via JS -->
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 16. BRAND CONSISTENCY SCORE VIEW -->
+        <!-- ============================================== -->
+        <section id="view-consistency" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">INTEGRITY AUDIT SYSTEM</div>
+              <h1 class="view-title">Brand Consistency Score</h1>
+              <p class="view-subtitle">Automated verification of cross-channel brand fidelity.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.recalculateConsistencyScore()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <polyline points="1 20 1 14 7 14"></polyline>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                <span>Re-Audit Brand</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="consistency-score-layout">
+            <!-- BIG SCORE GAUGE CARD -->
+            <div class="studio-card glass-panel score-hero-card">
+              <div class="radial-gauge-wrapper">
+                <svg class="radial-gauge-svg" viewBox="0 0 200 200">
+                  <circle cx="100" cy="100" r="80" class="radial-track"/>
+                  <circle cx="100" cy="100" r="80" class="radial-fill" id="gauge-fill-circle" stroke-dasharray="502" stroke-dashoffset="30"/>
+                </svg>
+                <div class="gauge-inner-content">
+                  <span class="gauge-number" id="big-consistency-score">94%</span>
+                  <span class="gauge-label">EXCELLENT</span>
+                </div>
+              </div>
+              <h2 class="score-status-title">"Excellent Brand Consistency"</h2>
+              <p class="score-status-desc">
+                Your visual system, typography, and tone of voice exhibit elite cross-platform harmonization. Minor opportunities remain in tone alignment across customer support templates.
+              </p>
+            </div>
+
+            <!-- DETAILED CATEGORY BREAKDOWN -->
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Pillar-by-Pillar Breakdown</h3>
+              <div class="consistency-breakdown-list">
+                <div class="breakdown-row">
+                  <div class="breakdown-meta">
+                    <span class="breakdown-name">Colors System (Hex/RGB/CMYK)</span>
+                    <strong class="breakdown-val text-positive">98%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" style="width: 98%"></div></div>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-meta">
+                    <span class="breakdown-name">Visual Style & Imagery Guidelines</span>
+                    <strong class="breakdown-val text-positive">96%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" style="width: 96%"></div></div>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-meta">
+                    <span class="breakdown-name">Typography Hierarchy & Scale</span>
+                    <strong class="breakdown-val text-positive">95%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" style="width: 95%"></div></div>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-meta">
+                    <span class="breakdown-name">Logo Usage & Clearspace Integrity</span>
+                    <strong class="breakdown-val text-positive">92%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" style="width: 92%"></div></div>
+                </div>
+                <div class="breakdown-row">
+                  <div class="breakdown-meta">
+                    <span class="breakdown-name">Verbal Tone & Copywriting Voice</span>
+                    <strong class="breakdown-val text-warm">90%</strong>
+                  </div>
+                  <div class="meter-track"><div class="meter-fill" style="width: 90%"></div></div>
+                </div>
+              </div>
+
+              <div class="divider-line my-16"></div>
+
+              <h4 class="subcard-title mb-12">Recommended Studio Actions</h4>
+              <ul class="recommendation-list">
+                <li>
+                  <input type="checkbox" id="chk-rec-1" checked onchange="window.BrandoraApp.toggleAuditCheck()">
+                  <label for="chk-rec-1">Standardize dark mode contrast ratios for packaging vector assets</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="chk-rec-2" checked onchange="window.BrandoraApp.toggleAuditCheck()">
+                  <label for="chk-rec-2">Distribute updated font-pairing guidelines to marketing team</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="chk-rec-3" onchange="window.BrandoraApp.toggleAuditCheck()">
+                  <label for="chk-rec-3">Audit transactional email copy against "Confident, Crisp" tone rubric</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 17. REPORTS VIEW -->
+        <!-- ============================================== -->
+        <section id="view-reports" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">CLIENT DELIVERABLES</div>
+              <h1 class="view-title">Reports</h1>
+              <p class="view-subtitle">Generate dynamic client-ready brand audit dossiers and identity briefs.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.openGenerateReportModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Generate Report</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="reports-grid" class="reports-cards-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 18. NOTIFICATIONS VIEW -->
+        <!-- ============================================== -->
+        <section id="view-notifications" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">STUDIO FEED</div>
+              <h1 class="view-title">Notifications</h1>
+              <p class="view-subtitle">Stay informed on brand updates, asset uploads, and deadlines.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.markAllNotificationsRead()">Mark All Read</button>
+              <button type="button" class="btn btn-danger-outline btn-sm" onclick="window.BrandoraApp.clearAllNotifications()">Clear All</button>
+            </div>
+          </div>
+
+          <div class="studio-card glass-panel">
+            <div id="notifications-full-list" class="notifications-list">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 19. MESSAGING VIEW -->
+        <!-- ============================================== -->
+        <section id="view-messages" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">INTERNAL COLLABORATION</div>
+              <h1 class="view-title">Studio Chat</h1>
+              <p class="view-subtitle">Real-time discussion threads with strategists, designers, and directors.</p>
+            </div>
+          </div>
+
+          <div class="messenger-container glass-panel">
+            <!-- THREADS SIDEBAR -->
+            <div class="messenger-threads">
+              <div class="messenger-search">
+                <input type="text" id="messenger-search-input" class="form-input" placeholder="Search discussions..." oninput="window.BrandoraApp.filterChatThreads(this.value)">
+              </div>
+              <div id="messenger-threads-list" class="threads-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- ACTIVE CHAT VIEW -->
+            <div class="messenger-active-pane">
+              <div class="active-thread-header" id="active-thread-header">
+                <div class="chat-header-user">
+                  <div class="user-avatar-sm" id="chat-active-avatar">MC</div>
+                  <div>
+                    <h4 id="chat-active-name">Marcus Chen</h4>
+                    <span class="chat-active-status" id="chat-active-role">Brand Strategist &bull; Online</span>
+                  </div>
+                </div>
+                <div class="chat-header-actions">
+                  <button type="button" class="btn-icon-subtle" title="Active Project">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div id="active-chat-messages" class="chat-messages-area">
+                <!-- Injected via JS -->
+              </div>
+
+              <form id="chat-composer-form" class="chat-composer" onsubmit="event.preventDefault(); window.BrandoraApp.sendChatMessage();">
+                <input type="text" id="chat-composer-input" class="chat-input" placeholder="Type message to team (Press Enter to send)..." autocomplete="off" required>
+                <button type="submit" class="btn btn-primary btn-sm btn-glow">
+                  <span>Send</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 20. SETTINGS VIEW -->
+        <!-- ============================================== -->
+        <section id="view-settings" class="studio-view">
+          <div class="view-header-row">
+            <div>
+              <div class="view-badge">WORKSPACE CONFIGURATION</div>
+              <h1 class="view-title">Settings</h1>
+              <p class="view-subtitle">Manage preferences, appearance, notifications, and local storage data.</p>
+            </div>
+            <div class="view-actions">
+              <button type="button" class="btn btn-primary btn-sm btn-glow" onclick="window.BrandoraApp.saveSettings()">Save Preferences</button>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Appearance & Visual Effects</h3>
+              <div class="setting-toggle-row">
+                <div>
+                  <strong>Electric Amber Accent Glow</strong>
+                  <p class="setting-desc">Enable subtle ambient glow around active buttons and cards.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-glow-effects" checked onchange="window.BrandoraApp.toggleSetting('glow', this.checked)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-toggle-row">
+                <div>
+                  <strong>Compact Workspace Mode</strong>
+                  <p class="setting-desc">Reduce card margins and spacing for high-density information display.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-compact-mode" onchange="window.BrandoraApp.toggleSetting('compact', this.checked)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-toggle-row">
+                <div>
+                  <strong>Micro-Animations</strong>
+                  <p class="setting-desc">Smooth transitions on cards, modals, and tab navigations.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-animations" checked onchange="window.BrandoraApp.toggleSetting('animations', this.checked)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="studio-card glass-panel">
+              <h3 class="card-title mb-16">Notification Preferences</h3>
+              <div class="setting-toggle-row">
+                <div>
+                  <strong>Client Approval Alerts</strong>
+                  <p class="setting-desc">Push notifications when client feedback or sign-off is submitted.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-notif-approvals" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-toggle-row">
+                <div>
+                  <strong>Task Deadline Reminders</strong>
+                  <p class="setting-desc">Alert 24 hours before creative milestone due dates.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-notif-deadlines" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-toggle-row">
+                <div>
+                  <strong>Team Chat Pings</strong>
+                  <p class="setting-desc">Notify when a team strategist tags your handle.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setting-notif-chat" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="studio-card glass-panel col-span-2">
+              <h3 class="card-title mb-16">Data Management & LocalStorage</h3>
+              <p class="text-dim mb-16">All your brand identity, assets, palettes, and clients are safely stored locally in your browser's persistent LocalStorage engine.</p>
+              <div class="data-actions-row">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.BrandoraApp.exportWorkspaceData()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span>Export Backup (JSON)</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('import-file-input').click()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <span>Import Backup (JSON)</span>
+                </button>
+                <input type="file" id="import-file-input" class="hidden" accept=".json" onchange="window.BrandoraApp.importWorkspaceData(event)">
+                <button type="button" class="btn btn-danger-outline btn-sm" onclick="window.BrandoraApp.confirmResetDemoData()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-sm">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                  </svg>
+                  <span>Reset All Demo Data</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- STUDIO FOOTER -->
+      <footer class="studio-footer">
+        <div class="footer-left">
+          <span class="footer-brand">BRANDORA</span>
+          <span class="footer-tagline">"Build a Brand People Remember."</span>
+        </div>
+        <div class="footer-links">
+          <button type="button" class="footer-link" onclick="window.BrandoraApp.showLegalModal('Privacy Policy')">Privacy</button>
+          <button type="button" class="footer-link" onclick="window.BrandoraApp.showLegalModal('Terms of Service')">Terms</button>
+          <button type="button" class="footer-link" onclick="window.BrandoraApp.showLegalModal('Studio Support')">Support</button>
+          <button type="button" class="footer-link" onclick="window.BrandoraApp.showLegalModal('Documentation')">Documentation</button>
+        </div>
+        <div class="footer-right">
+          <span class="footer-copyright">&copy; 2026 BRANDORA. All rights reserved.</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- UNIVERSAL MODAL SYSTEM -->
+  <div id="universal-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-container glass-panel">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title">Modal Title</h3>
+        <button type="button" class="modal-close-btn" onclick="window.BrandoraApp.closeModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div id="modal-body" class="modal-body">
+        <!-- Injected dynamic form / preview -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
